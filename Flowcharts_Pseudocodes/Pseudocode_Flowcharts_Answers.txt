@@ -1,0 +1,169 @@
+========================================
+SECTION 1: PSEUDOCODE PROBLEMS
+========================================
+
+----------------------------------------
+Problem PC-1: Prime Number Checker
+----------------------------------------
+Write a pseudocode algorithm that takes a positive integer N > 1 as input and 
+checks whether it is a Prime number or Not Prime.
+
+PSEUDOCODE:
+-----------
+
+ALGORITHM CheckPrime(N)
+    // Input: A positive integer N where N > 1
+    // Output: "Prime" if N is prime, "Not Prime" otherwise
+    
+    IF N <= 1 THEN
+        RETURN "Not Prime"
+    END IF
+    
+    IF N == 2 THEN
+        RETURN "Prime"
+    END IF
+    
+    IF N % 2 == 0 THEN
+        RETURN "Not Prime"
+    END IF
+    
+    SET limit = FLOOR(SQRT(N))
+    
+    FOR i = 3 TO limit STEP 2 DO
+        IF N % i == 0 THEN
+            RETURN "Not Prime"
+        END IF
+    END FOR
+    
+    RETURN "Prime"
+END ALGORITHM
+
+
+TRACE EXAMPLE 1: N = 61
+- N = 61, limit = FLOOR(SQRT(61)) = 7
+- i = 3: 61 % 3 = 1 ≠ 0 → continue
+- i = 5: 61 % 5 = 1 ≠ 0 → continue
+- i = 7: 61 % 7 = 5 ≠ 0 → continue
+- Loop ends, RETURN "Prime"
+
+TRACE EXAMPLE 2: N = 8
+- N = 8
+- N % 2 == 0 → RETURN "Not Prime"
+
+
+----------------------------------------
+Problem PC-2: Number Digit Reversal
+----------------------------------------
+Write a pseudocode algorithm that takes an integer N as input and returns the 
+number with its digits reversed using mathematical operations.
+
+PSEUDOCODE:
+-----------
+
+ALGORITHM ReverseDigits(N)
+    // Input: An integer N (can be positive or negative)
+    // Output: The integer with digits reversed
+    
+    SET reversed = 0
+    SET original = N
+    
+    WHILE original != 0 DO
+        SET lastDigit = original % 10
+        SET reversed = (reversed * 10) + lastDigit
+        SET original = original / 10    // integer division
+    END WHILE
+    
+    RETURN reversed
+END ALGORITHM
+
+
+TRACE EXAMPLE 1: N = 1234
+- original = 1234, reversed = 0
+- Iteration 1: lastDigit = 4, reversed = (0*10)+4 = 4, original = 123
+- Iteration 2: lastDigit = 3, reversed = (4*10)+3 = 43, original = 12
+- Iteration 3: lastDigit = 2, reversed = (43*10)+2 = 432, original = 1
+- Iteration 4: lastDigit = 1, reversed = (432*10)+1 = 4321, original = 0
+- original == 0 → loop ends
+- RETURN 4321
+
+TRACE EXAMPLE 2: N = 806
+- original = 806, reversed = 0
+- Iteration 1: lastDigit = 6, reversed = 6, original = 80
+- Iteration 2: lastDigit = 0, reversed = 60, original = 8
+- Iteration 3: lastDigit = 8, reversed = 608, original = 0
+- RETURN 608
+
+
+========================================
+SECTION 2: FLOWCHART DESCRIPTIONS
+========================================
+
+----------------------------------------
+Problem FC-1: Prime Number Flowchart
+----------------------------------------
+
+The flowchart has the following structure (from top to bottom):
+
+[START] (oval/terminal node)
+    ↓
+[INPUT: Read N] (parallelogram/input block)
+    ↓
+[N <= 1?] (diamond/decision)
+    ├── YES → [OUTPUT: "Not Prime"] → [END]
+    └── NO  →
+                ↓
+        [N == 2?] (diamond)
+            ├── YES → [OUTPUT: "Prime"] → [END]
+            └── NO  →
+                        ↓
+                [N % 2 == 0?] (diamond)
+                    ├── YES → [OUTPUT: "Not Prime"] → [END]
+                    └── NO  →
+                                ↓
+                        [SET limit = FLOOR(SQRT(N))]
+                        [SET i = 3]
+                                ↓
+                        [i <= limit?] (diamond/loop condition)
+                            ├── NO  → [OUTPUT: "Prime"] → [END]
+                            └── YES →
+                                        ↓
+                                [N % i == 0?] (diamond)
+                                    ├── YES → [OUTPUT: "Not Prime"] → [END]
+                                    └── NO  →
+                                                ↓
+                                        [i = i + 2] (process)
+                                                ↓
+                                        (loop back to [i <= limit?])
+
+
+----------------------------------------
+Problem FC-2: Number Digit Reversal Flowchart
+----------------------------------------
+
+The flowchart has the following structure (from top to bottom):
+
+[START] (oval/terminal node)
+    ↓
+[INPUT: Read N] (parallelogram/input block)
+    ↓
+[SET reversed = 0] (process block)
+    ↓
+[N > 0?] (diamond/loop condition)
+    ├── NO  → [OUTPUT: reversed] → [END]
+    └── YES →
+                ↓
+        [SET lastDigit = N % 10] (process)
+                ↓
+        [SET reversed = (reversed * 10) + lastDigit] (process)
+                ↓
+        [SET N = N / 10] (integer division) (process)
+                ↓
+        (loop back to [N > 0?])
+
+
+KEY FLOWCHART COMPONENTS:
+- Terminal nodes: [START] and [END] (ovals)
+- Input/Output blocks: parallelograms
+- Process blocks: rectangles
+- Decision/Loop blocks: diamonds
+- Flow direction: arrows connecting all components
